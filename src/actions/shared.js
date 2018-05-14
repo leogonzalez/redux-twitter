@@ -2,6 +2,8 @@
 import { getInitialData } from "../utils/api";
 import { receiveUsers } from "./users";
 import { receiveTweets } from "./tweets";
+import { authUser } from "./authUser";
+const AUTHED_USER = 'dan_abramov';
 
 export function handleInitialData() {
   return dispatch => {
@@ -9,9 +11,10 @@ export function handleInitialData() {
       .then(({ users, tweets }) => {
         dispatch(receiveUsers(users));
         dispatch(receiveTweets(tweets));
+        dispatch(authUser(AUTHED_USER));
       })
       .catch(err => {
-        console.log('Error on Initial Data', err);
+        console.log("Error on Initial Data", err);
       });
   };
 }
