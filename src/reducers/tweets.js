@@ -1,4 +1,4 @@
-import { RECEIVE_TWEETS, TOGGLE_TWEET } from "../actions/tweets";
+import { RECEIVE_TWEETS, TOGGLE_TWEET, SAVE_TWEET } from "../actions/tweets";
 
 export default function tweetsReducer(state = {}, action) {
   switch (action.type) {
@@ -19,6 +19,11 @@ export default function tweetsReducer(state = {}, action) {
               : state[id].likes.concat(authedUser)
         }
       };
+    case SAVE_TWEET:
+      return {
+        ...state,
+        [action.tweet.id]: action.tweet
+      }
     default:
       return state;
   }
