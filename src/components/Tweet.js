@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { formatTweet, formatDate } from "../utils/helpers";
 import { Icon } from "react-materialize";
-import { handleLikeToggle, likeToggle } from "../actions/tweets";
+import { handleLikeToggle} from "../actions/tweets";
 
 class Tweet extends Component {
   likeHandler = () => {
@@ -13,7 +13,6 @@ class Tweet extends Component {
   render() {
     const {
       name,
-      id,
       timestamp,
       text,
       avatar,
