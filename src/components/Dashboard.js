@@ -5,7 +5,7 @@ import Tweet from "./Tweet";
 
 function Dashboard(props) {
   return (
-    <div>
+    <div className='container'>
       <h1> Your Timeline </h1>
       <ul>
       {props.tweets.map((tweet) => {
