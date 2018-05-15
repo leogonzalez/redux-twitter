@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { formatTweet, formatDate } from "../utils/helpers";
 import { Icon } from "react-materialize";
+import { handleLikeToggle, likeToggle } from "../actions/tweets";
 
 class Tweet extends Component {
+  likeHandler = () => {
+    const { id, hasLiked } = this.props;
+    console.log("CLICK PROPS:", id, hasLiked);
+    this.props.dispatch(handleLikeToggle({id, hasLiked}));
+  };
   render() {
     const {
       name,
@@ -25,14 +31,16 @@ class Tweet extends Component {
           <span style={{ color: "gray" }}>
             {parent ? <p>Replying to: {parent.author}</p> : null}
           </span>
-          <p className='tweet-text'>{text}</p>
+          <p className="tweet-text">{text}</p>
           <div className="tweet-icons">
-            <div style={{marginRight:'10px'}}>
+            <div style={{ marginRight: "10px" }}>
               <Icon>reply</Icon>
               <span>{replies}</span>
             </div>
-            <div>
-              <Icon className={hasLiked?'red-text':''}>{hasLiked ? "favorite" : "favorite_border"}</Icon>
+            <div onClick={() => this.likeHandler()}>
+              <Icon className={hasLiked ? "red-text" : ""}>
+                {hasLiked ? "favorite" : "favorite_border"}
+              </Icon>
               <span>{likes}</span>
             </div>
           </div>
@@ -42,8 +50,8 @@ class Tweet extends Component {
   }
 }
 
-function mapStateToProps({ tweets, users, authedUser }, { id }) {
-  const tweet = tweets[id];
+function mapStateToProps({ tweets, users, authedUser }, ownProps) {
+  const tweet = tweets[ownProps.id];
   const author = users[tweet.author];
   const parentTweet = tweets[tweet.replyingTo];
   return formatTweet(tweet, author, authedUser, parentTweet);
