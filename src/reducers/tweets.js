@@ -20,34 +20,22 @@ export default function tweetsReducer(state = {}, action) {
         }
       };
     case SAVE_TWEET:
-      const { replyingTo } = action.tweet;
+      let replyingTo = {};
+      // const { replyingTo } = action.tweet;
       const newid = action.tweet.id;
-
-      if (replyingTo) {
-        return {
-          ...state,
-          [newid]: action.tweet,
-          [replyingTo]: {
-            ...state[replyingTo],
-            replies: state[replyingTo].replies.concat(newid)
-          }
+      if (action.tweet.replyingTo !== null) {
+        replyingTo = {
+          ...state[replyingTo],
+          replies: state[replyingTo].replies.concat(newid)
         };
       }
+
       return {
         ...state,
-        [newid]: action.tweet
+        [newid]: action.tweet,
+        ...replyingTo
       };
     default:
       return state;
   }
 }
-
-// [action.id]: {
-//   ...state[action.id],
-//   likes:
-//     action.hasLiked === true
-//       ? state[action.id].likes.filter(name => {
-//           return name !== action.authedUser;
-//         })
-//       : state[action.id].likes.concat(action.authedUser)
-// }
