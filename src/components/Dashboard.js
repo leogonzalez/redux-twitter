@@ -1,20 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import Tweet from "./Tweet";
+import { NavLink } from "react-router-dom";
 // dashboard is a presentational component
 
 function Dashboard(props) {
   return (
-    <div className='container'>
-      <h3 className='center'> Your Timeline </h3>
+    <div className="container">
+      <h3 className="center"> Your Timeline </h3>
       <ul>
-      {props.tweets.map((tweet) => {
-        return (
-          <li key={tweet.id}>
-            <Tweet id={tweet.id}/>
-          </li>
-        )
-      })}
+        {props.tweets.map(tweet => {
+          return (
+            <NavLink  to={`/tweet/${tweet.id}`} key={tweet.id} activeClassName='active'>
+              <Tweet id={tweet.id} />
+            </NavLink>
+          );
+        })}
       </ul>
     </div>
   );

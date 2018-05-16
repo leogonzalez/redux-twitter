@@ -23,6 +23,7 @@ class App extends Component {
               <div>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/newtweet" component={Compose} />
+                <Route path="/tweet/:id" component={TweetPage}/>
               </div>
             )}
           </div>

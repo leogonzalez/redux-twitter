@@ -7,7 +7,6 @@ import { handleLikeToggle} from "../actions/tweets";
 class Tweet extends Component {
   likeHandler = () => {
     const { id, hasLiked } = this.props;
-    console.log("CLICK PROPS:", id, hasLiked);
     this.props.dispatch(handleLikeToggle({id, hasLiked}));
   };
   render() {
@@ -22,7 +21,7 @@ class Tweet extends Component {
       parent
     } = this.props;
     return (
-      <a className="tweet">
+      <div className="tweet">
         <img src={avatar} alt={name} className="avatar" />
         <div className="tweet-info">
           <h5>{name}</h5>
@@ -44,7 +43,7 @@ class Tweet extends Component {
             </div>
           </div>
         </div>
-      </a>
+      </div>
     );
   }
 }
