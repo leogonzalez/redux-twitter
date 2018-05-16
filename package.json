@@ -1,22 +1,33 @@
 {
   "name": "redux-twitter",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "<img src=\"https://tylermcginnis.com/tylermcginnis_glasses-300.png\" width=\"300\" align=\"right\">",
+  "main": "index.js",
   "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-materialize": "^2.2.1",
-    "react-redux": "^5.0.7",
-    "react-redux-loading-bar": "^4.0.5",
-    "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
-    "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node ./bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix client",
+    "server": "nodemon ./bin/www",
+    "dev": "concurrently \"npm run client\" \"npm run server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leogonzalez/redux-twitter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leogonzalez/redux-twitter/issues"
+  },
+  "homepage": "https://github.com/leogonzalez/redux-twitter#readme",
+  "dependencies": {
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "morgan": "~1.9.0"
+  },
+  "engines": {
+    "node": "8.10.0"
   }
 }
