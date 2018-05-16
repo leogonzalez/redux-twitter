@@ -7,9 +7,9 @@ class Compose extends Component {
     text: ""
   };
   onSubmitHandler(text) {
-
-    this.props.dispatch(handleSaveTweet({text}));
-    // console.log(text);
+    console.log("COMPOSE PROPS",this.props);
+    const {replyingTo} = this.props;
+    this.props.dispatch(handleSaveTweet({text, replyingTo}));
   }
   render() {
     return (

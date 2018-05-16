@@ -20,10 +20,23 @@ export default function tweetsReducer(state = {}, action) {
         }
       };
     case SAVE_TWEET:
+      const { replyingTo } = action.tweet;
+      const newid = action.tweet.id;
+
+      if (replyingTo) {
+        return {
+          ...state,
+          [newid]: action.tweet,
+          [replyingTo]: {
+            ...state[replyingTo],
+            replies: state[replyingTo].replies.concat(newid)
+          }
+        };
+      }
       return {
         ...state,
-        [action.tweet.id]: action.tweet
-      }
+        [newid]: action.tweet
+      };
     default:
       return state;
   }
