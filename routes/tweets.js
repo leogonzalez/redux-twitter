@@ -5,7 +5,13 @@ const Tweet = mongoose.model("tweet");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  res.send("Welcome to tweets");
+  Tweet.find({})
+    .then(tweets => {
+      res.send(tweets);
+    })
+    .catch(e => {
+      res.status(400).send(e.message);
+    });
 });
 
 router.post("/new", (req, res, next) => {

@@ -5,7 +5,13 @@ const User = mongoose.model("user");
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {
-  res.send("respond with a resource");
+  User.find({})
+    .then(users => {
+      res.send(users);
+    })
+    .catch(e => {
+      res.status(400).send(e.message);
+    });
 });
 
 /* POST NEW USERS */
