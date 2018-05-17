@@ -1,7 +1,6 @@
 {
   "name": "redux-twitter",
   "version": "1.0.0",
-  "description": "<img src=\"https://tylermcginnis.com/tylermcginnis_glasses-300.png\" width=\"300\" align=\"right\">",
   "main": "index.js",
   "private": true,
   "scripts": {
@@ -25,6 +24,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "helmet": "^3.12.1",
     "morgan": "~1.9.0"
   },
   "engines": {
