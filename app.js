@@ -7,10 +7,10 @@ const { mongoURI } = require("./config/keys");
 
 // ROUTING MODULE LOADING (order important)
 require("./models/User.js");
+require("./models/Tweets.js");
 
-const indexRouter = require("./routes/index");
+const tweetsRouter = require("./routes/tweets");
 const usersRouter = require("./routes/users");
-
 
 // Connecting to Mlab database
 mongoose.connect(mongoURI);
@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/users", usersRouter);
+app.use("/tweets", tweetsRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
