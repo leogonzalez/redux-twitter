@@ -4,7 +4,14 @@ const logger = require("morgan");
 const helmet = require("helmet");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const mongoose = require("mongoose");
+const { mongoURI } = require("./config/keys");
 
+mongoose.connect(mongoURI);
+var db = mongoose.connection;
+db.once('open', () => {
+  console.log('MongoDB connected');
+})
 const app = express();
 
 app.use(helmet());
