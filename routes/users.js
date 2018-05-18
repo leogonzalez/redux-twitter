@@ -31,4 +31,30 @@ router.post("/new", (req, res, next) => {
     });
 });
 
+//UPDATE USER INFO
+
+router.put("/:id", (req, res, next) => {
+  const { id } = req.params;
+  const { tweets, avatarURL, name } = req.body;
+
+  let updateObject = {}
+  if (tweets) {
+    updateObject = {$push:{tweets}}
+  }
+
+  if (avatarURL) {
+    updateObject["avatarURL"] = avatarURL
+  }
+
+  if (name) {
+    updateObject["name"] = name
+  }
+
+  console.log(updateObject);
+
+  User.findByIdAndUpdate(id, updateObject, { new: true }).then(updoc => {
+    res.send(updoc);
+  });
+});
+
 module.exports = router;
