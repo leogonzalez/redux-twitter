@@ -7,8 +7,23 @@ const User = mongoose.model("user");
 router.get("/", function(req, res, next) {
   User.find({})
     .then(users => {
+      throwIfUserNotFound(users);
       res.send(users);
     })
+    .catch(e => {
+      res.status(400).send(e.message);
+    });
+});
+
+router.get("/:_id", function(req, res, next) {
+  const { _id } = req.params;
+  User.findOne({ _id })
+    .then(user => {
+      console.log(user);
+      throwIfUserNotFound(user);
+      res.send(user);
+    })
+    .then(console.log)
     .catch(e => {
       res.status(400).send(e.message);
     });
@@ -37,24 +52,33 @@ router.put("/:id", (req, res, next) => {
   const { id } = req.params;
   const { tweets, avatarURL, name } = req.body;
 
-  let updateObject = {}
+  let updateObject = {};
   if (tweets) {
-    updateObject = {$push:{tweets}}
+    updateObject = { $push: { tweets } };
   }
 
   if (avatarURL) {
-    updateObject["avatarURL"] = avatarURL
+    updateObject["avatarURL"] = avatarURL;
   }
 
   if (name) {
-    updateObject["name"] = name
+    updateObject["name"] = name;
   }
 
-  console.log(updateObject);
-
-  User.findByIdAndUpdate(id, updateObject, { new: true }).then(updoc => {
-    res.send(updoc);
-  });
+  User.findByIdAndUpdate(id, updateObject, { new: true })
+    .then(updoc => {
+      throwIfUserNotFound(updoc);
+      res.send(updoc);
+    })
+    .catch(e => {
+      res.send(e.message);
+    });
 });
+
+function throwIfUserNotFound(user) {
+  if (user === null) {
+    throw new Error("User not found");
+  }
+}
 
 module.exports = router;
