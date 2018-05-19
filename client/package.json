@@ -2,7 +2,16 @@
   "name": "redux-twitter",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/users": {
+      "target": "http://localhost:3001"
+    },
+    "/tweets": {
+      "target": "http://localhost:3001"
+    }
+  },
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-materialize": "^2.2.1",

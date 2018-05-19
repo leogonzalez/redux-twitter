@@ -15,8 +15,8 @@ router.get("/", function(req, res, next) {
 });
 
 router.post("/new", (req, res, next) => {
-  const { text } = req.body;
-  const tweet = new Tweet({ text: text });
+  const { text, author } = req.body;
+  const tweet = new Tweet({ text: text, timestamp: new Date().getTime(), author });
   tweet
     .save()
     .then(doc => {

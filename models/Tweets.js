@@ -7,10 +7,10 @@ const tweetsSchema = new Schema({
     type: String,
     required: true
   },
-  author: [ObjectId],
+  author: ObjectId,
   timestamp: Date,
   likes: {
-    type: [String],
+    type: [ObjectId],
     default: []
   },
   replies: {
