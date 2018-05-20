@@ -6,7 +6,8 @@ import { handleLikeToggle } from "../actions/tweets";
 import { Link } from "react-router-dom";
 
 class Tweet extends Component {
-  likeHandler = () => {
+  likeHandler = (e) => {
+    e.preventDefault();
     const { id, hasLiked } = this.props;
     this.props.dispatch(handleLikeToggle({ id, hasLiked }));
   };
@@ -37,12 +38,12 @@ class Tweet extends Component {
               <Icon>reply</Icon>
               <span>{replies}</span>
             </div>
-            <button onClick={this.likeHandler}>
+            <div onClick={this.likeHandler}>
               <Icon className={hasLiked ? "red-text" : ""}>
                 {hasLiked ? "favorite" : "favorite_border"}
               </Icon>
               <span>{likes}</span>
-            </button>
+            </div>
           </div>
         </div>
       </Link>
