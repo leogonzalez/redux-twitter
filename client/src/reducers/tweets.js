@@ -27,12 +27,16 @@ export default function tweetsReducer(state = {}, action) {
           ...state[action.tweet.replyingTo],
           replies: state[action.tweet.replyingTo].replies.concat(newid)
         };
+        return {
+          ...state,
+          [newid]: action.tweet,
+          [action.tweet.replyingTo]: {...replyingToObj}
+        };
       }
 
       return {
         ...state,
-        [newid]: action.tweet,
-        [action.tweet.replyingTo]: {...replyingToObj}
+        [newid]: action.tweet
       };
     default:
       return state;
