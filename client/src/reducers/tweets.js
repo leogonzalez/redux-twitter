@@ -20,20 +20,19 @@ export default function tweetsReducer(state = {}, action) {
         }
       };
     case SAVE_TWEET:
-      let replyingTo = {};
-      // const { replyingTo } = action.tweet;
+      let replyingToObj = {};
       const newid = action.tweet.id;
       if (action.tweet.replyingTo !== null) {
-        replyingTo = {
-          ...state[replyingTo],
-          replies: state[replyingTo].replies.concat(newid)
+        replyingToObj = {
+          ...state[action.tweet.replyingTo],
+          replies: state[action.tweet.replyingTo].replies.concat(newid)
         };
       }
 
       return {
         ...state,
         [newid]: action.tweet,
-        ...replyingTo
+        [action.tweet.replyingTo]: {...replyingToObj}
       };
     default:
       return state;

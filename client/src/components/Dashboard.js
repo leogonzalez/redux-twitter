@@ -11,9 +11,9 @@ function Dashboard(props) {
       <ul>
         {props.tweets.map(tweet => {
           return (
-            <NavLink  to={`/tweet/${tweet._id}`} key={tweet._id} activeClassName='active'>
-              <Tweet id={tweet._id} />
-            </NavLink>
+            <li  key={tweet.id}>
+              <Tweet id={tweet.id} />
+            </li>
           );
         })}
       </ul>

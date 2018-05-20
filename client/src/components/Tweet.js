@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { formatTweet, formatDate } from "../utils/helpers";
 import { Icon } from "react-materialize";
-import { handleLikeToggle} from "../actions/tweets";
+import { handleLikeToggle } from "../actions/tweets";
+import { Link } from "react-router-dom";
 
 class Tweet extends Component {
   likeHandler = () => {
     const { id, hasLiked } = this.props;
-    this.props.dispatch(handleLikeToggle({id, hasLiked}));
+    this.props.dispatch(handleLikeToggle({ id, hasLiked }));
   };
   render() {
     const {
@@ -18,10 +19,11 @@ class Tweet extends Component {
       likes,
       replies,
       hasLiked,
-      parent
+      parent,
+      id
     } = this.props;
     return (
-      <div className="tweet">
+      <Link to={`/tweet/${id}`} className="tweet">
         <img src={avatar} alt={name} className="avatar" />
         <div className="tweet-info">
           <h5>{name}</h5>
@@ -35,15 +37,15 @@ class Tweet extends Component {
               <Icon>reply</Icon>
               <span>{replies}</span>
             </div>
-            <div onClick={() => this.likeHandler()}>
+            <button onClick={this.likeHandler}>
               <Icon className={hasLiked ? "red-text" : ""}>
                 {hasLiked ? "favorite" : "favorite_border"}
               </Icon>
               <span>{likes}</span>
-            </div>
+            </button>
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }

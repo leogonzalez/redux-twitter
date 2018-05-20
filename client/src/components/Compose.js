@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { handleSaveTweet } from "../actions/tweets";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 class Compose extends Component {
   state = {
@@ -35,4 +36,4 @@ class Compose extends Component {
   }
 }
 
-export default connect()(Compose);
+export default withRouter(connect()(Compose));
