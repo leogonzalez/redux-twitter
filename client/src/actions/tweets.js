@@ -1,5 +1,4 @@
-import { saveLikeToggle, saveTweet } from "../utils/api";
-import { formatTweet } from "../utils/helpers";
+// import { saveLikeToggle } from "../utils/api";
 import axios from "axios";
 
 export const RECEIVE_TWEETS = "RECEIVE_TWEETS";
@@ -47,7 +46,6 @@ export function handleLikeToggle(info) {
 export function handleSaveTweet(tweet) {
   return (dispatch, getState) => {
     const authUser = getState().authedUser;
-    const { name, avatarURL } = getState().users[authUser];
     const tweetInfo = {
       text: tweet.text,
       author: authUser,

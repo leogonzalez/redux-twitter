@@ -1,5 +1,5 @@
 import { RECEIVE_USERS } from "../actions/users";
-import { SAVE_TWEET } from "../actions/tweets";
+// import { SAVE_TWEET } from "../actions/tweets";
 
 export default function usersReducer(state = {}, action) {
   switch (action.type) {
