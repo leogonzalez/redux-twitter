@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import Tweet from "./Tweet";
-import { NavLink } from "react-router-dom";
 // dashboard is a presentational component
 
 function Dashboard(props) {
@@ -11,8 +10,8 @@ function Dashboard(props) {
       <ul>
         {props.tweets.map(tweet => {
           return (
-            <li  key={tweet.id}>
-              <Tweet id={tweet.id} />
+            <li  key={tweet._id}>
+              <Tweet _id={tweet._id} />
             </li>
           );
         })}
@@ -27,7 +26,7 @@ function mapStateToProps({ tweets }) {
       return tweets[tweet];
     })
     .sort((a, b) => {
-      return b.timestamp - a.timestamp;
+      return Date.parse(b.timestamp) - Date.parse(a.timestamp);
     });
   return {
     tweets: tweetsArray

@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 class Tweet extends Component {
   likeHandler = (e) => {
     e.preventDefault();
-    const { id, hasLiked } = this.props;
-    this.props.dispatch(handleLikeToggle({ id, hasLiked }));
+    const { _id, hasLiked } = this.props;
+    this.props.dispatch(handleLikeToggle({ _id, hasLiked }));
   };
   render() {
     const {
@@ -21,10 +21,10 @@ class Tweet extends Component {
       replies,
       hasLiked,
       parent,
-      id
+      _id
     } = this.props;
     return (
-      <Link to={`/tweet/${id}`} className="tweet">
+      <Link to={`/tweet/${_id}`} className="tweet">
         <img src={avatar} alt={name} className="avatar" />
         <div className="tweet-info">
           <h5>{name}</h5>
@@ -52,7 +52,7 @@ class Tweet extends Component {
 }
 
 function mapStateToProps({ tweets, users, authedUser }, ownProps) {
-  const tweet = tweets[ownProps.id];
+  const tweet = tweets[ownProps._id];
   const author = users[tweet.author];
   const parentTweet = tweets[tweet.replyingTo];
   return formatTweet(tweet, author, authedUser, parentTweet);

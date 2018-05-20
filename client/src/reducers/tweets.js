@@ -5,24 +5,24 @@ export default function tweetsReducer(state = {}, action) {
     case RECEIVE_TWEETS:
       return { ...state, ...action.tweets };
     case TOGGLE_TWEET:
-      const { id, hasLiked, authedUser } = action.info;
-      console.log(id, hasLiked, authedUser);
+      const { _id, hasLiked, authedUser } = action.info;
       return {
         ...state,
-        [id]: {
-          ...state[id],
+        [_id]: {
+          ...state[_id],
           likes:
             hasLiked === true
-              ? state[id].likes.filter(name => {
+              ? state[_id].likes.filter(name => {
                   return name !== authedUser;
                 })
-              : state[id].likes.concat(authedUser)
+              : state[_id].likes.concat(authedUser)
         }
       };
     case SAVE_TWEET:
       let replyingToObj = {};
-      const newid = action.tweet.id;
-      if (action.tweet.replyingTo !== null) {
+      const newid = action.tweet._id;
+      if (action.tweet.replyingTo) {
+        // debugger
         replyingToObj = {
           ...state[action.tweet.replyingTo],
           replies: state[action.tweet.replyingTo].replies.concat(newid)

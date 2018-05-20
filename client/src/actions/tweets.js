@@ -1,4 +1,6 @@
 import { saveLikeToggle, saveTweet } from "../utils/api";
+import { formatTweet } from "../utils/helpers";
+import axios from "axios";
 
 export const RECEIVE_TWEETS = "RECEIVE_TWEETS";
 export const TOGGLE_TWEET = "TOGGLE_TWEET";
@@ -29,26 +31,33 @@ function saveTweetAction(tweet) {
 
 export function handleLikeToggle(info) {
   return (dispatch, getState) => {
+    // debugger
     const authedInfo = {
       ...info,
       authedUser: getState().authedUser
     };
+    //optimistic UI
     dispatch(likeToggle(authedInfo));
-    return saveLikeToggle(authedInfo).catch(e => {
-      dispatch(likeToggle(authedInfo));
-    });
+    // return saveLikeToggle(authedInfo).catch(e => {
+    //   dispatch(likeToggle(authedInfo));
+    // });
   };
 }
 
 export function handleSaveTweet(tweet) {
   return (dispatch, getState) => {
+    const authUser = getState().authedUser;
+    const { name, avatarURL } = getState().users[authUser];
     const tweetInfo = {
       text: tweet.text,
-      author: getState().authedUser,
+      author: authUser,
       replyingTo: tweet.replyingTo || null
     };
-    return saveTweet(tweetInfo).then(formattedTweet => {
-      dispatch(saveTweetAction(formattedTweet));
-    });
+    return axios
+      .post("/tweets/new", tweetInfo)
+      .then(res => {
+        console.log('USER: ', res.data);
+        dispatch(saveTweetAction(res.data))
+      })
   };
 }

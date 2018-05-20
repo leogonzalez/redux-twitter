@@ -214,16 +214,16 @@ export function _getTweets () {
   })
 }
 
-export function _saveLikeToggle ({ id, hasLiked, authedUser }) {
+export function _saveLikeToggle ({ _id, hasLiked, authedUser }) {
   return new Promise((res, rej) => {
     setTimeout(() => {
       tweets = {
         ...tweets,
-        [id]: {
-          ...tweets[id],
+        [_id]: {
+          ...tweets[_id],
           likes: hasLiked === true
-            ? tweets[id].likes.filter((uid) => uid !== authedUser)
-            : tweets[id].likes.concat([authedUser])
+            ? tweets[_id].likes.filter((uid) => uid !== authedUser)
+            : tweets[_id].likes.concat([authedUser])
         }
       }
 
@@ -239,7 +239,7 @@ function generateUID () {
 function formatTweet ({ author, text, replyingTo = null }) {
   return {
     author,
-    id: generateUID(),
+    _id: generateUID(),
     likes: [],
     replies: [],
     text,
@@ -266,7 +266,7 @@ export function _saveTweet ({ text, author, replyingTo }) {
         ...users,
         [author]: {
           ...users[author],
-          tweets: users[author].tweets.concat([formattedTweet.id])
+          tweets: users[author].tweets.concat([formattedTweet._id])
         }
       }
 
