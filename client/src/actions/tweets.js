@@ -51,11 +51,8 @@ export function handleSaveTweet(tweet) {
       author: authUser,
       replyingTo: tweet.replyingTo || null
     };
-    return axios
-      .post("/tweets/new", tweetInfo)
-      .then(res => {
-        console.log('USER: ', res.data);
-        dispatch(saveTweetAction(res.data))
-      })
+    return axios.post("/tweets/new", tweetInfo).then(res => {
+      dispatch(saveTweetAction(res.data));
+    });
   };
 }

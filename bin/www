@@ -20,14 +20,20 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
-var io = require("socket.io")(server);
-//Socket.io
 
+//Socket.io
+var io = require("socket.io")(server);
 io.origins("*:*");
 io.on("connection", socket => {
-  // socket.emit('Somebody connected')
   console.log("Client connected");
+
+  socket.on("newTweet", () => {
+    console.log("newTweet");
+  });
+
 });
+app.io = io;
+
 
 /**
  * Listen on provided port, on all network interfaces.

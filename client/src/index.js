@@ -6,9 +6,10 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducers from "./reducers";
 import middleware from "./middleware";
-require("./services/socketio.js");
+import {ioDispatch} from "./services/socketio.js";
 
 const store = createStore(reducers, middleware);
+ioDispatch(store.dispatch);
 
 ReactDOM.render(
   <Provider store={store}>
