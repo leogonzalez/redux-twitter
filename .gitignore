@@ -12,6 +12,7 @@
 
 # production
 /client/build
+dev-CORS.js
 
 # misc
 .DS_Store
